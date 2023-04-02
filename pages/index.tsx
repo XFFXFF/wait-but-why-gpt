@@ -194,7 +194,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Wait But Why GPT</title>
+        <title>得意忘形 GPT</title>
         <meta
           name="description"
           content={`AI-powered search and chat for Tim Urban's blog "Wait But Why."`}

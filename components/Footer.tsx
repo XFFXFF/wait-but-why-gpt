@@ -10,46 +10,55 @@ export const Footer: FC = () => {
         Created by
         <a
           className="hover:opacity-50 mx-1"
-          href="https://twitter.com/mckaywrigley"
+          href="https://github.com/XFFXFF"
           target="_blank"
           rel="noreferrer"
         >
-          Mckay Wrigley
+          Zhou Fan
+        </a>
+        and
+        <a
+          className="hover:opacity-50 mx-1"
+          href=""
+          target="_blank"
+          rel="noreferrer"
+        >
+          Tu Junjie
         </a>
         based on
         <a
           className="hover:opacity-50 ml-1"
-          href="https://twitter.com/waitbutwhy"
+          // href="https://twitter.com/waitbutwhy"
           target="_blank"
           rel="noreferrer"
         >
-          Tim Urban
+          Zhang Xiaoyu
         </a>
-        {`'s blog`}
+        {`'s podcast`}
         <a
           className="hover:opacity-50 ml-1"
-          href="https://waitbutwhy.com/"
+          // href="https://waitbutwhy.com/"
           target="_blank"
           rel="noreferrer"
         >
-          Wait But Why
+          得意忘形
         </a>
         .
       </div>
 
       <div className="flex space-x-4">
-        <a
+        {/* <a
           className="flex items-center hover:opacity-50"
           href="https://twitter.com/mckaywrigley"
           target="_blank"
           rel="noreferrer"
         >
           <IconBrandTwitter size={24} />
-        </a>
+        </a> */}
 
         <a
           className="flex items-center hover:opacity-50"
-          href="https://github.com/mckaywrigley/wait-but-why-gpt"
+          href="https://github.com/XFFXFF/wait-but-why-gpt"
           target="_blank"
           rel="noreferrer"
         >
