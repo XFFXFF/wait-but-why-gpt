@@ -11,9 +11,10 @@ const handler = async (req: Request): Promise<Response> => {
     };
 
     const input = query.replace(/\n/g, " ");
-    console.log("input", input)
 
-    const res = await fetch("https://api.aibeings.io/v1/embeddings", {
+    const base_path = process.env.OPENAI_BASE_PATH ?? "https://api.openai.com/v1";
+
+    const res = await fetch(`${base_path}/embeddings`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`
@@ -31,7 +32,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const queryRequest = {
       vector: embedding,
-      topK: 3,
+      topK: matches,
       includeValues: true,
       includeMetadata: true,
     };

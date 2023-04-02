@@ -12,7 +12,8 @@ export const OpenAIStream = async (prompt: string, apiKey: string) => {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
 
-  const res = await fetch("https://api.aibeings.io/v1/chat/completions", {
+  const base_path = process.env.OPENAI_BASE_PATH ?? "https://api.openai.com/v1";
+  const res = await fetch(`${base_path}/chat/completions`, {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${apiKey}`
