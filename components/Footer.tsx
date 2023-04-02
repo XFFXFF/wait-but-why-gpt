@@ -41,7 +41,7 @@ export const Footer: FC = () => {
           target="_blank"
           rel="noreferrer"
         >
-          得意忘形
+          De Yi Wang Xing
         </a>
         .
       </div>
