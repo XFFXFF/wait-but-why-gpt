@@ -197,7 +197,7 @@ export default function Home() {
         <title>得意忘形 GPT</title>
         <meta
           name="description"
-          content={`AI-powered search and chat for Tim Urban's blog "Wait But Why."`}
+          content={`AI-powered search and chat for Zhang Xiaoyu's podcast "得意忘形"`}
         />
         <meta
           name="viewport"
@@ -389,7 +389,7 @@ export default function Home() {
                         <div className="flex items-center">
                           <Image
                             className="rounded-lg"
-                            src={getImage(chunk.title)}
+                            src={"/deyiwangxing.png"}
                             width={103}
                             height={70}
                             alt={chunk.title}
@@ -414,7 +414,7 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="mt-6 text-center text-lg">{`AI-powered search and chat for Tim Urban's blog "Wait But Why."`}</div>
+              <div className="mt-6 text-center text-lg">{`AI-powered search and chat for Zhang Xiaoyu's podcast "De Yi Wang Xing"`}</div>
             )}
           </div>
         </div>
