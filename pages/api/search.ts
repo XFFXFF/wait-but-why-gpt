@@ -1,5 +1,3 @@
-import { supabaseAdmin } from "@/utils";
-
 export const config = {
   runtime: "edge"
 };
@@ -13,8 +11,9 @@ const handler = async (req: Request): Promise<Response> => {
     };
 
     const input = query.replace(/\n/g, " ");
+    console.log("input", input)
 
-    const res = await fetch("https://api.openai.com/v1/embeddings", {
+    const res = await fetch("https://api.aibeings.io/v1/embeddings", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`
@@ -29,16 +28,24 @@ const handler = async (req: Request): Promise<Response> => {
     const json = await res.json();
     const embedding = json.data[0].embedding;
 
-    const { data: chunks, error } = await supabaseAdmin.rpc("wbw_search", {
-      query_embedding: embedding,
-      similarity_threshold: 0.01,
-      match_count: matches
-    });
 
-    if (error) {
-      console.error(error);
-      return new Response("Error", { status: 500 });
-    }
+    const queryRequest = {
+      vector: embedding,
+      topK: 3,
+      includeValues: true,
+      includeMetadata: true,
+    };
+    const response = await fetch("https://zhangxiaoyu-bc355c5.svc.us-central1-gcp.pinecone.io/query", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "accept": "application/json",
+        "Api-Key": process.env.PINECONE_API_KEY ?? ""
+      },
+      body: JSON.stringify(queryRequest)
+    })
+    const response_json = await response.json()
+    const chunks = response_json.matches.map((match: any) => match.metadata)
 
     return new Response(JSON.stringify(chunks), { status: 200 });
   } catch (error) {

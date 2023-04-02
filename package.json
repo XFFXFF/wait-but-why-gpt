@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@next/font": "^13.2.3",
+    "@pinecone-database/pinecone": "^0.0.12",
     "@tabler/icons-react": "^2.7.0",
     "@types/node": "18.14.2",
     "@types/react": "18.0.28",

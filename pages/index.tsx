@@ -1,7 +1,7 @@
 import { Answer } from "@/components/Answer/Answer";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { WBWChunk } from "@/types";
+import { XYChunk } from "@/types";
 import { getImage } from "@/utils/images";
 import { IconArrowRight, IconExternalLink, IconSearch } from "@tabler/icons-react";
 import endent from "endent";
@@ -13,7 +13,7 @@ export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [query, setQuery] = useState<string>("");
-  const [chunks, setChunks] = useState<WBWChunk[]>([]);
+  const [chunks, setChunks] = useState<XYChunk[]>([]);
   const [answer, setAnswer] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -51,7 +51,7 @@ export default function Home() {
       throw new Error(searchResponse.statusText);
     }
 
-    const results: WBWChunk[] = await searchResponse.json();
+    const results: XYChunk[] = await searchResponse.json();
 
     setChunks(results);
 
@@ -89,14 +89,14 @@ export default function Home() {
       throw new Error(searchResponse.statusText);
     }
 
-    const results: WBWChunk[] = await searchResponse.json();
+    const results: XYChunk[] = await searchResponse.json();
 
     setChunks(results);
 
     const prompt = endent`
-    Use the following passages to provide an answer to the query: "${query}"
+    Use the following passages to provide an answer to the query: "${query}, please answer with Chinese."
 
-    ${results?.map((d: any) => d.content).join("\n\n")}
+    ${results?.map((d: any) => d.text).join("\n\n")}
     `;
 
     const answerResponse = await fetch("/api/answer", {
@@ -354,26 +354,26 @@ export default function Home() {
                           <div className="flex items-center">
                             <Image
                               className="rounded-lg"
-                              src={getImage(chunk.post_title)}
+                              src={"/deyiwangxing.png"}
                               width={103}
                               height={70}
-                              alt={chunk.post_title}
+                              alt={chunk.title}
                             />
                             <div className="ml-4">
-                              <div className="font-bold text-xl">{chunk.post_title}</div>
-                              <div className="mt-1 font-bold text-sm">{chunk.post_date}</div>
+                              <div className="font-bold text-xl">{chunk.title}</div>
+                              <div className="mt-1 font-bold text-sm">{chunk.date}</div>
                             </div>
                           </div>
                           <a
                             className="hover:opacity-50 ml-4"
-                            href={chunk.post_url}
+                            href={chunk.url}
                             target="_blank"
                             rel="noreferrer"
                           >
                             <IconExternalLink />
                           </a>
                         </div>
-                        <div className="mt-4">{chunk.content}</div>
+                        <div className="mt-4">{chunk.text}</div>
                       </div>
                     </div>
                   ))}
@@ -389,26 +389,26 @@ export default function Home() {
                         <div className="flex items-center">
                           <Image
                             className="rounded-lg"
-                            src={getImage(chunk.post_title)}
+                            src={getImage(chunk.title)}
                             width={103}
                             height={70}
-                            alt={chunk.post_title}
+                            alt={chunk.title}
                           />
                           <div className="ml-4">
-                            <div className="font-bold text-xl">{chunk.post_title}</div>
-                            <div className="mt-1 font-bold text-sm">{chunk.post_date}</div>
+                            <div className="font-bold text-xl">{chunk.title}</div>
+                            <div className="mt-1 font-bold text-sm">{chunk.date}</div>
                           </div>
                         </div>
                         <a
                           className="hover:opacity-50 ml-2"
-                          href={chunk.post_url}
+                          href={chunk.url}
                           target="_blank"
                           rel="noreferrer"
                         >
                           <IconExternalLink />
                         </a>
                       </div>
-                      <div className="mt-4">{chunk.content}</div>
+                      <div className="mt-4">{chunk.text}</div>
                     </div>
                   </div>
                 ))}

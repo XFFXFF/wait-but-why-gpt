@@ -32,3 +32,10 @@ export type WBWJSON = {
   tokens: number;
   posts: WBWPost[];
 };
+
+export type XYChunk = {
+  date: string;
+  title: string;
+  url: string;
+  text: string;
+}
