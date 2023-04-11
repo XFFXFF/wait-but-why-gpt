@@ -19,7 +19,7 @@ export default function Home() {
 
   const [showSettings, setShowSettings] = useState<boolean>(false);
   const [mode, setMode] = useState<"search" | "chat">("chat");
-  const [matchCount, setMatchCount] = useState<number>(5);
+  const [matchCount, setMatchCount] = useState<number>(3);
   const [apiKey, setApiKey] = useState<string>("");
 
   const handleSearch = async () => {
@@ -61,10 +61,10 @@ export default function Home() {
   };
 
   const handleAnswer = async () => {
-    if (!apiKey) {
-      alert("Please enter an API key.");
-      return;
-    }
+    // if (!apiKey) {
+    //   alert("Please enter an API key.");
+    //   return;
+    // }
 
     if (!query) {
       alert("Please enter a query.");
@@ -173,23 +173,23 @@ export default function Home() {
     }
   }, [matchCount]);
 
-  useEffect(() => {
-    const WBW_KEY = localStorage.getItem("WBW_KEY");
-    const WBW_MATCH_COUNT = localStorage.getItem("WBW_MATCH_COUNT");
-    const WBW_MODE = localStorage.getItem("WBW_MODE");
+  // useEffect(() => {
+  //   const WBW_KEY = localStorage.getItem("WBW_KEY");
+  //   const WBW_MATCH_COUNT = localStorage.getItem("WBW_MATCH_COUNT");
+  //   const WBW_MODE = localStorage.getItem("WBW_MODE");
 
-    if (WBW_KEY) {
-      setApiKey(WBW_KEY);
-    }
+  //   if (WBW_KEY) {
+  //     setApiKey(WBW_KEY);
+  //   }
 
-    if (WBW_MATCH_COUNT) {
-      setMatchCount(parseInt(WBW_MATCH_COUNT));
-    }
+  //   if (WBW_MATCH_COUNT) {
+  //     setMatchCount(parseInt(WBW_MATCH_COUNT));
+  //   }
 
-    if (WBW_MODE) {
-      setMode(WBW_MODE as "search" | "chat");
-    }
-  }, []);
+  //   if (WBW_MODE) {
+  //     setMode(WBW_MODE as "search" | "chat");
+  //   }
+  // }, []);
 
   return (
     <>
@@ -213,7 +213,7 @@ export default function Home() {
         <Navbar />
         <div className="flex-1 overflow-auto">
           <div className="mx-auto flex h-full w-full max-w-[750px] flex-col items-center px-3 pt-4 sm:pt-8">
-            <button
+            {/* <button
               className="mt-4 flex cursor-pointer items-center space-x-2 rounded-full border border-zinc-600 px-3 py-1 text-sm hover:opacity-50"
               onClick={() => setShowSettings(!showSettings)}
             >
@@ -279,30 +279,31 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
 
-            {apiKey.length === 51 ? (
-              <div className="relative w-full mt-4">
-                <IconSearch className="absolute top-3 w-10 left-1 h-6 rounded-full opacity-50 sm:left-3 sm:top-4 sm:h-8" />
+            {/* {apiKey.length === 51 ? ( */}
+            <div className="relative w-full mt-4">
+              <IconSearch className="absolute top-3 w-10 left-1 h-6 rounded-full opacity-50 sm:left-3 sm:top-4 sm:h-8" />
 
-                <input
-                  ref={inputRef}
-                  className="h-12 w-full rounded-full border border-zinc-600 pr-12 pl-11 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 sm:h-16 sm:py-2 sm:pr-16 sm:pl-16 sm:text-lg"
-                  type="text"
-                  // placeholder="What is the Instant Gratification Monkey?"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  onKeyDown={handleKeyDown}
+              <input
+                ref={inputRef}
+                className="h-12 w-full rounded-full border border-zinc-600 pr-12 pl-11 focus:border-zinc-800 focus:outline-none focus:ring-1 focus:ring-zinc-800 sm:h-16 sm:py-2 sm:pr-16 sm:pl-16 sm:text-lg"
+                type="text"
+                // placeholder="What is the Instant Gratification Monkey?"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+              />
+
+              <button>
+                <IconArrowRight
+                  onClick={mode === "search" ? handleSearch : handleAnswer}
+                  className="absolute right-2 top-2.5 h-7 w-7 rounded-full bg-blue-500 p-1 hover:cursor-pointer hover:bg-blue-600 sm:right-3 sm:top-3 sm:h-10 sm:w-10 text-white"
                 />
+              </button>
+            </div>
 
-                <button>
-                  <IconArrowRight
-                    onClick={mode === "search" ? handleSearch : handleAnswer}
-                    className="absolute right-2 top-2.5 h-7 w-7 rounded-full bg-blue-500 p-1 hover:cursor-pointer hover:bg-blue-600 sm:right-3 sm:top-3 sm:h-10 sm:w-10 text-white"
-                  />
-                </button>
-              </div>
-            ) : (
+            { /*) : (
               <div className="text-center font-bold text-3xl mt-7">
                 Please enter your
                 <a
@@ -313,7 +314,7 @@ export default function Home() {
                 </a>
                 in settings.
               </div>
-            )}
+            )} */}
 
             {loading ? (
               <div className="mt-6 w-full">

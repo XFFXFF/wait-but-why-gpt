@@ -4,11 +4,17 @@ export const config = {
 
 const handler = async (req: Request): Promise<Response> => {
   try {
-    const { query, apiKey, matches } = (await req.json()) as {
+    const { query, matches } = (await req.json()) as {
       query: string;
       apiKey: string;
       matches: number;
     };
+
+    if (!process.env.OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY is not set");
+    }
+
+    const apiKey = process.env.OPENAI_API_KEY;
 
     const input = query.replace(/\n/g, " ");
 
@@ -46,6 +52,7 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify(queryRequest)
     })
     const response_json = await response.json()
+    console.log(response_json)
     const chunks = response_json.matches.map((match: any) => match.metadata)
 
     return new Response(JSON.stringify(chunks), { status: 200 });
