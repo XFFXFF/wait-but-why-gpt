@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { getPodcasts } from "@/lib/podcasts";
 import Link from "next/link";
+import { GetStaticProps } from "next";
 
 interface Podcast {
   id: string;
@@ -11,7 +12,9 @@ interface Podcast {
   proofreading: string;
 }
 
-export default function FirstPost({ allPostcastsData }) {
+export default function FirstPost({ allPostcastsData }: {
+  allPostcastsData: Podcast[];
+}) {
   return (
     <>
       <Head>
@@ -69,7 +72,7 @@ export default function FirstPost({ allPostcastsData }) {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const allPostcastsData = getPodcasts();
   return {
     props: {
