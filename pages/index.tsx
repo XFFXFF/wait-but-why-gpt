@@ -94,7 +94,7 @@ export default function Home() {
     setChunks(results);
 
     const prompt = endent`
-    Use the following passages to provide an answer to the query: "${query}, please answer with Chinese."
+    Use the following passages to provide an answer to the query: "${query}", please answer with Chinese.
 
     ${results?.map((d: any) => d.text).join("\n\n")}
     `;
