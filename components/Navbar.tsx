@@ -2,14 +2,15 @@ import { IconExternalLink } from "@tabler/icons-react";
 import Image from "next/image";
 import { FC } from "react";
 import king from "../public/deyiwangxing.png";
+import Link from "next/link";
 
 export const Navbar: FC = () => {
   return (
     <div className="flex h-[60px] border-b border-gray-300 py-2 px-8 items-center justify-between">
       <div className="font-bold text-2xl flex items-center">
-        <a
+        <Link
           className="flex hover:opacity-50 items-center"
-          href="https://deyiwangxing-gpt.vercel.app"
+          href="/"
         >
           <Image
             className="hidden sm:flex"
@@ -18,9 +19,11 @@ export const Navbar: FC = () => {
             height={40}
           />
           <div className="ml-2">得意忘形 GPT</div>
-        </a>
+        </Link>
       </div>
-      <div>
+      <div className="flex">
+        <Link href="/contributors" className="mr-4">贡献者</Link>
+
         <a
           className="flex items-center hover:opacity-50"
           href="https://www.xiaoyuzhoufm.com/podcast/5e74543a418a84a046c4e50e"
